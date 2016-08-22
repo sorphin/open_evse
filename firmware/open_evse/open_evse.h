@@ -43,6 +43,7 @@
 // charge for a specified amount of time and then stop
 //#define TIME_LIMIT
 
+#define ZMPT101B
 #ifdef ZMPT101B
 #define VOLTMETER
 #define VOLTMETER_PIN 2 // analog AC Line voltage voltemeter pin ADCx
