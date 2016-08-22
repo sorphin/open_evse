@@ -40,6 +40,23 @@
 
 #define VERSION "D4.3.3"
 
+// charge for a specified amount of time and then stop
+//#define TIME_LIMIT
+
+#ifdef ZMPT101B
+#define VOLTMETER
+#define VOLTMETER_PIN 2 // analog AC Line voltage voltemeter pin ADCx
+// 35 ms is just a bit longer than 1.5 cycles at 50 Hz
+#define VOLTMETER_POLL_INTERVAL (5)
+// This is just a wild guess
+// #define VOLTMETER_SCALE_FACTOR (266)     // original guess
+#define DEFAULT_VOLT_SCALE_FACTOR (262)        // calibrated for Craig K OpenEVSE II build
+//#define DEFAULT_VOLT_SCALE_FACTOR (298)        // calibrated for lincomatic's OEII
+// #define VOLTMETER_OFFSET_FACTOR (40000)  // original guess
+#define DEFAULT_VOLT_OFFSET (46800)     // calibrated for Craig K OpenEVSE II build
+//#define DEFAULT_VOLT_OFFSET (12018)     // calibrated for lincomatic's OEII
+#endif // ZMPT101B
+
 #include "Language_default.h"   //Default language should always be included as bottom layer
 
 //Language preferences: Add your custom languagefile here. See Language_default.h for more info.
@@ -84,9 +101,6 @@
 
 #include "AutoCurrentCapacityController.h"
 #endif
-
-// charge for a specified amount of time and then stop
-#define TIME_LIMIT
 
 // support Mennekes (IEC 62196) type 2 locking pin
 //#define MENNEKES_LOCK
