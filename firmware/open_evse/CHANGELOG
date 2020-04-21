@@ -1,5 +1,12 @@
 Change Log
 
+20200411 SCL V7.0.0
+- added OpenEVSE V6 support
+  - detection by looking for PD7 LOW
+  - RELAY_PWM - close relay w/ DC and the switch to PWM for hold
+  - if not V6 hardware detected same behavior as before on charging pin
+- added $SC M to set max hardware current capacity. Can be written only once
+	
 20200330 SCL
 - fixed SetAmmeterDirty(1) compile error
 	
