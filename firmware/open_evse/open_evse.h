@@ -53,12 +53,8 @@
 //-- begin features
 
 //#define OCPP
-// V6 hardware
+// support V6 hardware
 #define OEV6
-#define V6_CHARGING_PIN  5
-#define V6_CHARGING_PIN2 6
-#define RELAY_PWM
-#define RELAY_HOLD_DELAY_TUNING // enable Z0
 
 // auto detect L1/L2
 #define AUTOSVCLEVEL
@@ -89,7 +85,7 @@
 #define RAPI_SERIAL
 
 // RAPI $WF support
-#define RAPI_WF
+//#define RAPI_WF
 
 // RAPI over I2C
 //#define RAPI_I2C
@@ -312,20 +308,17 @@ extern AutoCurrentCapacityController g_ACCController;
 // certification.. redraw display periodically when enabled
 //#define PERIODIC_LCD_REFRESH_MS 120000UL
 
+
 // when closing DC relay set to HIGH for m_relayCloseMs, then
 // switch to m_relayHoldPwm
 // ONLY WORKS PWM-CAPABLE PINS!!!
 // use Arduino pin number PD5 = 5, PD6 = 6
-//#define RELAY_AUTO_PWM_PIN 5
+#define RELAY_PWM
+#define DEFAULT_RELAY_CLOSE_MS 25
+#define DEFAULT_RELAY_HOLD_PWM 75 // (0-255, where 0=0%, 255=100%
 // enables RAPI $Z0 for tuning PWM (see rapi_proc.h for $Z0 syntax)
 // PWM parameters written to/loaded from EEPROM
-// when done tuning, put hardcoded parameters into m_relayCloseMs
-// and m_relayHoldPwm below
-//#define RELAY_AUTO_PWM_PIN_TESTING
-#ifndef RELAY_AUTO_PWM_PIN_TESTING
-//#define m_relayCloseMs 250UL
-//#define m_relayHoldPwm 50 // duty cycle 0-255
-#endif //RELAY_AUTO_PWM_PIN_TESTING
+#define RELAY_HOLD_DELAY_TUNING // enable Z0
 
 //-- end features
 
@@ -468,7 +461,9 @@ extern AutoCurrentCapacityController g_ACCController;
 #define ACLINE2_REG &PIND
 #define ACLINE2_IDX 4
 
-#ifndef RELAY_AUTO_PWM_PIN
+#define V6_CHARGING_PIN  5
+#define V6_CHARGING_PIN2 6
+
 // digital Relay trigger pin
 #define CHARGING_REG &PINB
 #define CHARGING_IDX 0
@@ -478,7 +473,6 @@ extern AutoCurrentCapacityController g_ACCController;
 //digital Charging pin for AC relay
 #define CHARGINGAC_REG &PINB
 #define CHARGINGAC_IDX 1
-#endif // !RELAY_AUTO_PWM_PIN
 
 // obsolete LED pin
 //#define RED_LED_REG &PIND
