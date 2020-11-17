@@ -251,8 +251,6 @@ char *u2a(unsigned long x,int8_t digits)
   return s;
 }
 
-void EvseReset();
-
 // wdt_init turns off the watchdog timer after we use it
 // to reboot
 
@@ -2307,12 +2305,12 @@ uint8_t DelayTimer::IsInAwakeTimeInterval()
 
   if (IsTimerEnabled() && IsTimerValid()) {
     g_CurrTime = g_RTC.now();
-    m_CurrHour = g_CurrTime.hour();
-    m_CurrMin = g_CurrTime.minute();
+    uint8_t currHour = g_CurrTime.hour();
+    uint8_t currMin = g_CurrTime.minute();
     
     uint16_t startTimerMinutes = m_StartTimerHour * 60 + m_StartTimerMin; 
     uint16_t stopTimerMinutes = m_StopTimerHour * 60 + m_StopTimerMin;
-    uint16_t currTimeMinutes = m_CurrHour * 60 + m_CurrMin;
+    uint16_t currTimeMinutes = currHour * 60 + currMin;
 
     if (stopTimerMinutes < startTimerMinutes) { //End time is for next day 
       
